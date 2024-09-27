@@ -1,5 +1,8 @@
 <?php
 
+$intput1 = 5;
+$intput2 = 3;
+
 // Recursive function that prints numbers from the input to 0.
 function printNumbers(int $input): void
 {
@@ -12,14 +15,29 @@ function printNumbers(int $input): void
     }
 }
 
-printNumbers(5);
-printNumbers(3);
+printNumbers($intput1);
+printNumbers($intput2);
 
+
+// Recursive function that prints factorial of a number.
+function calculateFactorial(int $input): int
+{
+    if ($input > 0) {
+        $newInput = $input - 1;
+        $factorial = $input * calculateFactorial($newInput);
+        return $factorial;
+    } else {
+        // The factorial of 0 is 1.
+        return 1;
+    }
+}
+
+echo "El factorial de {$intput1} es: " . calculateFactorial($intput1) . PHP_EOL;
+echo "El factorial de {$intput2} es: " . calculateFactorial($intput2) . PHP_EOL;
 
 /*
 
 Bonus track:
 
-Fes també una funció recursiva que calculi i retorni el factorial d'un nombre donat.
 Per últim, mostra la serie de Fibonacci d'un nombre donat.
 */
