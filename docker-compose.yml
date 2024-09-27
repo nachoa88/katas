@@ -1,0 +1,10 @@
+services:
+  app:
+    build:
+      context: .
+    image: php-8.3.2
+    container_name: katas
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html

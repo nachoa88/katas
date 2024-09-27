@@ -17,4 +17,4 @@ Differents Katas done during year 2024. I've lost by backup so I'll have to do t
 30/05 - Textfile Search
 
 #### OTHERS:
-27/09 - Juego de Números Vivos
+27/09 - Live Numbers (Juego de Números Vivos)
