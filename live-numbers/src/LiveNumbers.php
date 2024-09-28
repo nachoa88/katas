@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace LiveNumbers;
 
-class JuegoNumerosVivos
+class LiveNumbers
 {
     public function play(int $numero): int
     {
