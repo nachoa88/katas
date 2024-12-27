@@ -20,53 +20,35 @@ class Battle
         return "BATTLE INFORMATION: " . $this->fighter1->getName() . "- VS - " . $this->fighter2->getName() . ".\n";
     }
 
-    // Getters & Setters.
-    public function getFighter1(): Fighter
-    {
-        return $this->fighter1;
-    }
 
-    public function getFighter2(): Fighter
+    public function fight(): void
     {
-        return $this->fighter1;
-    }
-
-    public function getRound(): int
-    {
-        return $this->round;
-    }
-
-    public function setRound(int $round): void
-    {
-        $this->round = $round;
-    }
-
-/*   
-
-- El combat acaba quan un dels dos lluitadors té la vida a 0. S’anuncia el guanyador/a llavors*/
-    public function fight()
-    {
-        while ($this->fighter1->getLife() > 0 && $this->fighter2->getLife() > 0) {
+        while ($this->isBattleActive()) {
             echo "Round " . $this->round . " begins!\n";
 
-            $attacker = $this->determineAttacker($this->fighter1, $this->fighter2);
-            $defender = $attacker === $this->fighter1 ? $this->fighter2 : $this->fighter1;
+            $attacker = $this->getAttacker($this->fighter1, $this->fighter2);
+            $defender = $this->getDefender($attacker);
             echo $attacker->getName() . " is attacking!\n";
 
             $damage = $this->calculateDamage($attacker, $defender);
             echo $defender->getName() . " receives " . $damage . " damage!\n";
-
-            $defender->setLife($defender->getLife() - $damage);
-            echo $defender->getName() . " has " . $defender->getLife() . " life points, while " . $attacker->getName() . " has " . $attacker->getLife() . " life points.\n";
+            $this->applyDamage($defender, $damage);
+            
+            echo $defender->getName() . " has " . $defender->getLife() . " life points! While " . $attacker->getName() . " has " . $attacker->getLife() . " points and willing to continue!\n";
             echo "Round " . $this->round . " ends!\n\n";
 
             $this->round++;
         }
         $winner = ($this->fighter1->getLife() > 0) ? $this->fighter1 : $this->fighter2;
-        echo "The battle is over! " . $winner->getName() . " wins!\n";
+        echo "THE BATTLE IS OVER! " . strtoupper($winner->getName()) . " WINS!!!\n";
     }
 
-    public function determineAttacker(Fighter $fighter1, Fighter $fighter2): Fighter
+    private function isBattleActive(): bool 
+    {
+        return $this->fighter1->getLife() > 0 && $this->fighter2->getLife() > 0;
+    }
+
+    private function getAttacker(Fighter $fighter1, Fighter $fighter2): Fighter
     {
         // random number between 1 and 100 in order to determine the attacker
         $random = mt_rand(1, 100);
@@ -83,9 +65,19 @@ class Battle
         return $random <= 70 ? $fighter2 : $fighter1;
     }
 
-    public function calculateDamage(Fighter $attacker, Fighter $defender): int
+    private function getDefender(Fighter $attacker): Fighter
+    {
+        return $attacker === $this->fighter1 ? $this->fighter2 : $this->fighter1;
+    }
+
+    private function calculateDamage(Fighter $attacker, Fighter $defender): int
     {
         $damage = $attacker->getAttack() - $defender->getDefense();
         return $damage <= 0 ? 1 : $damage;
+    }
+
+    private function applyDamage(Fighter $defender, int $damage): void
+    {
+        $defender->setLife($defender->getLife() - $damage);
     }
 }
