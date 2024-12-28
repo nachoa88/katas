@@ -4,7 +4,7 @@ const MIN_INPUT = 1;
 const MAX_INPUT = 9;
 
 // Validate input
-function getValidatedInput(): int 
+function getValidatedInput(): int
 {
     while (true) {
         $input = readline("Enter a number between 1 and 9: ");
@@ -15,28 +15,33 @@ function getValidatedInput(): int
     }
 }
 
-function isValidInput(mixed $input): bool 
+function isValidInput(mixed $input): bool
 {
-    return is_numeric($input) 
-        && (int) $input >= MIN_INPUT 
+    return is_numeric($input)
+        && (int) $input >= MIN_INPUT
         && (int) $input <= MAX_INPUT;
 }
 
-
-echo "Train brakes failed! Reach exactly 67 in 10 tries to activate the emergency brake!\n";
-function activateEmergencyBrake(int $maxInputs, int $limit): void
+function activateEmergencyBrake(int $maxTries, int $limit, bool $showPartialSum): void
 {
-    $currentInput = 0;
+    $triesLeft = $maxTries;
     $sum = 0;
 
-    while ($currentInput < $maxInputs) {
+    while ($triesLeft > 0) {
         $input = getValidatedInput();
         $sum += $input;
-        $currentInput++;
-        
-        if ($sum < $limit && $currentInput < $maxInputs) {
-            echo "The sum is: " . $sum . " and is your " . $currentInput . " try.\n";
-        } elseif ($sum === $limit) {
+        $triesLeft--;
+
+        if ($sum < $limit && $triesLeft > 0) {
+            if ($showPartialSum) {
+                echo "Partial sum is: " . $sum . ".\n";
+            }
+            echo "You've got " . $triesLeft . " try/tries left.\n";
+        } elseif ($sum === $limit && $showPartialSum) {
+            echo "Nice job! But now you have to reach 81 in order to stop the train.\n";
+            activateEmergencyBrake(10, 81, false);
+            break;
+        } elseif ($sum === $limit && !$showPartialSum) {
             echo "You've saved your life, the train is stopping!!.\n";
             break;
         } else {
@@ -46,4 +51,5 @@ function activateEmergencyBrake(int $maxInputs, int $limit): void
     }
 }
 
-activateEmergencyBrake(10, 67);
+echo "Train brakes are failing! Reach exactly 67 in 10 tries to activate the emergency brake!\n";
+activateEmergencyBrake(10, 67, true);

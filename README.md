@@ -6,7 +6,7 @@ Differents Katas done during year 2024. I've lost by backup so I'll have to do t
 #### KATAS BOOTCAMP PHP:
 - 29/02 - Recursive Call
 - 07/03 - Fight
-- 14/03 - Train Countdown - Veure en PHP com executar per terminal el fitxer i generar un input de valor sense necessitat de front.
+- 14/03 - Train Countdown
 
 
 ### 2024 - TO-DO LIST
