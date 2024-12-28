@@ -7,12 +7,12 @@ Differents Katas done during year 2024. I've lost by backup so I'll have to do t
 - 29/02 - Recursive Call
 - 07/03 - Fight
 - 14/03 - Train Countdown
+- 21/03 - Armstrong Number - Veure de fer versió amb càlculs numerics.
 
 
 ### 2024 - TO-DO LIST
 
 #### KATAS BOOTCAMP PHP:
-- 21/03 - Armstrong Number - Veure de fer versió amb càlculs numerics.
 - 11/04 - Numerology - Veure si es pot fer només amb càlculs numèrics.
 - 25/04 - Dungeons & Dragons
 - 02/05 - Dungeons & Dragons Tests
