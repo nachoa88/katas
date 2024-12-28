@@ -13,23 +13,34 @@ function getDigitsArray(int $num): array
     return array_reverse($digits);
 }
 
-function calculateArmstrong(int $num): string
+function sumPowersOfDigits(array $digits): int
 {
-    $digits = getDigitsArray($num);
-    // print_r($digits); // Uncomment this line to see the array of digits.
-    $armstrong = 0;
+    $sum = 0;
+    $power = count($digits);
 
     foreach ($digits as $digit) {
-        $pow = pow($digit, count($digits));
+        $pow = pow($digit, $power);
         echo "The power of " . $digit . " multiplied by " . count($digits) . " is: " . $pow . "\n";
-        $armstrong += $pow;
+        $sum += $pow;
     }
-    echo "The sum of the powers is: " . $armstrong . "\n";
-    if ($armstrong === $num) {
-        return "The number " . $num . " is an Armstrong number.\n\n";
-    } else {
-        return "The number " . $num . " is not an Armstrong number.\n\n";
+    echo "The sum of the powers is: " . $sum . "\n";
+    return $sum;
+}
+
+function calculateArmstrong(int $num): string
+{
+    if ($num <= 0) {
+        return "Please provide a positive number.\n";
     }
+    $digits = getDigitsArray($num);
+    // print_r($digits); // Uncomment this line to see the array of digits.
+    $sum = sumPowersOfDigits($digits);
+  
+    return sprintf(
+        "The number %d %s an Armstrong number.\n\n",
+        $num,
+        ($sum === $num) ? "is" : "is not"
+    );
 }
 
 echo (calculateArmstrong(153));

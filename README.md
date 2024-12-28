@@ -7,7 +7,7 @@ Differents Katas done during year 2024. I've lost by backup so I'll have to do t
 - 29/02 - Recursive Call
 - 07/03 - Fight
 - 14/03 - Train Countdown
-- 21/03 - Armstrong Number - Veure de fer versió amb càlculs numerics.
+- 21/03 - Armstrong Number
 
 
 ### 2024 - TO-DO LIST
