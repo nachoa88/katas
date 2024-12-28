@@ -2,6 +2,7 @@
 
 const MIN_INPUT = 1;
 const MAX_INPUT = 9;
+const COUNTDOWN_SECONDS = 30;
 
 // Validate input
 function getValidatedInput(): int
@@ -24,21 +25,29 @@ function isValidInput(mixed $input): bool
 
 function activateEmergencyBrake(int $maxTries, int $limit, bool $showPartialSum): void
 {
+    echo "Reach exactly " . $limit . " in " . $maxTries . " tries!\n";
     $triesLeft = $maxTries;
     $sum = 0;
+    $endTime = time() + COUNTDOWN_SECONDS;
 
     while ($triesLeft > 0) {
+        $timeLeft = $endTime - time();
+        if ($timeLeft <= 0) {
+            echo "Time's up! Train crashed!\n";
+            break;
+        }
+        echo "Time remaining: {$timeLeft} seconds\n";
         $input = getValidatedInput();
         $sum += $input;
         $triesLeft--;
 
         if ($sum < $limit && $triesLeft > 0) {
             if ($showPartialSum) {
-                echo "Partial sum is: " . $sum . ".\n";
+                echo "Partial sum is: " . $sum . ". ";
             }
             echo "You've got " . $triesLeft . " try/tries left.\n";
         } elseif ($sum === $limit && $showPartialSum) {
-            echo "Nice job! But now you have to reach 81 in order to stop the train.\n";
+            echo "Nice job! But now you have another task.\n";
             activateEmergencyBrake(10, 81, false);
             break;
         } elseif ($sum === $limit && !$showPartialSum) {
@@ -51,5 +60,5 @@ function activateEmergencyBrake(int $maxTries, int $limit, bool $showPartialSum)
     }
 }
 
-echo "Train brakes are failing! Reach exactly 67 in 10 tries to activate the emergency brake!\n";
+echo "Train brakes are failing! Activate the emergency brake!\n";
 activateEmergencyBrake(10, 67, true);
